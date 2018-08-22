@@ -1,0 +1,54 @@
+    
+    //后台
+    @RequestMapping(value = "/audit", method = {RequestMethod.POST, RequestMethod.GET})
+    @ResponseBody
+    public void audit(@RequestParam("id") long id, @RequestParam("status") String status,HttpServletResponse response) {
+        JsonObject jsonObject = new JsonObject();
+        try {
+           
+                String redeemCodeString="";
+            
+                response.reset();
+                OutputStream outputStream = new BufferedOutputStream(response.getOutputStream());
+                response.setContentType("application/octet-stream");
+                response.setHeader("Content-Disposition","attachment; filename="+"redeemCodeString.txt");
+                outputStream.write(redeemCodeString.getBytes(),0,redeemCodeString.getBytes().length);
+                outputStream.close();
+            
+ 
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonObject.addProperty("msg","系统异常！");
+            jsonObject.addProperty("code",1);
+        }
+    }
+    //js
+                var xhr = new XMLHttpRequest();
+	    var str = "id=" + ticketId + "&status=" + status;
+            xhr.open('POST', "/admin/audit", true);    //也可以使用POST方式，根据接口
+            xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            xhr.responseType = "blob";   //返回类型blob
+            xhr.onload = function () {
+                //定义请求完成的处理函数
+                if (this.status === 200) {
+                        var blob = this.response;
+                        if(blob.size>0){
+                            var reader = new FileReader();
+                            reader.readAsDataURL(blob);   // 转换为base64，可以直接放入a标签href
+                            reader.onload = function (e) {
+                                // 转换完成，创建一个a标签用于下载
+                                var a = document.createElement('a');
+                                a.download = '兑换码.txt';
+                                a.href = e.target.result;
+                                $("body").append(a);    // 修复firefox中无法触发click
+                                a.click();
+                                $(a).remove();
+                                window.location.reload();
+                            }
+                        }else{
+                            window.location.reload();
+						}
+                }
+            };
+            xhr.send(str);
+
