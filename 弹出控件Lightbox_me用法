@@ -27,6 +27,16 @@ e:
                 <span>Don't be sad, just <a href="#">click here</a> to sign up!</span>
                 <a id="close_x" class="close sprited" href="#">close</a>
             </div>
+弹出层的样式修改非常简单，只需要会使用css就可以了。例如一下代码：
+
+#loginbox{ width:400px; display:none; background:white; border:1px solid #ccc; } 
+body { font-size:12px; font-family:微软雅黑; } 
+.loginbox-title { background: #eef2f7; border-bottom: 1px solid #ccc; margin-bottom:10px; padding:8px 0; font-size:14px; text-align:center; } 
+.loginbox-footer{ padding:8px 0; border-top:1px solid #ccc; text-align:center; background:#eef2f7; }
+table { width:98%; margin:0 8px; } 
+th, td { padding:8px 0; } 
+th { text-align:left; } 
+.big { padding:5px 18px; }
 
 Triggering a close
 You can manually trigger a close event by calling .trigger('close') on the element you have lightboxed. For example:
@@ -40,3 +50,23 @@ Repositioning happens on window resize or scroll, but sometimes you may need to 
 
 $ele.lightbox_me();
 $ele.trigger('reposition');
+
+Options
+Option	Default	Description
+appearEffect	"fadeIn"	The appear effect jQuery is to use on the modal.
+appearEase	""	The easing effect jQuery is to use on the modal. (requires jQuery easing)
+overlaySpeed	300	The time it takes (in ms, or "slow", "normal", "fast") for the overlay to fade in.
+lightboxSpeed	"fast"	The time it takes (in ms, or "slow", "normal", "fast") for the lightbox modal to animate in.
+closeSelector	".close"	The jQuery selector (in string format) you want lightbox_me to bind the close event to.
+closeClick	true	Whether or not to close the lightbox with the user clicks the overlay.
+closeEsc	true	Whether or not to close the lightbox when the user presses escape
+destroyOnClose	false	Whether or not to destroy the DOM element that has been lightboxed when the user closes it (this option is good if you're using ajax to create the DOM)
+showOverlay	true	Whether or not to show an overlay when presenting the modal.
+onLoad	function() {}	Function to call when the lightbox is completely open (after animation)
+onClose	function() {}	Function to call when the lightbox is completely closed (after animation)
+classPrefix	'lb'	The class to prefix the overlay CSS class
+zIndex	999	The base zIndex for the overlay. The iframe shim is this + 1, the modal is this + 2
+centered	false	Whether or not the modal is centered vertically
+modalCSS	{top: '40px'}	CSS applied to the modal when lightbox_me is run. If you specify a "top" it will be overridden if centered is set to true
+overlayCSS	{background: 'black', 
+opacity: .6}	CSS applied to the overlay when lightbox_me is run.
