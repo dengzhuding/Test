@@ -1,0 +1,42 @@
+This is a typical use-case for a modal: a sign in sheet. Create the sign in sheet in your document, then set it to display: none;, then attach a click handler to the item you want to invoke the sign in sheet:
+
+$('#try-1').click(function(e) {
+    $('#sign_up').lightbox_me({
+        centered: true, 
+        onLoad: function() { 
+            $('#sign_up').find('input:first').focus()
+            }
+        });
+    e.preventDefault();
+});
+
+e:
+<a href="#" id="try-1" class="try sprited">Try it!</a>
+<div id="sign_up">
+                <h3 id="see_id" class="sprited">Can I see some ID?</h3>
+                <span>Please sign in using the form below</span>
+                <div id="sign_up_form">
+                    <label><strong>Username:</strong> <input class="sprited"></label>
+                    <label><strong>Password:</strong> <input class="sprited"></label>
+                    <div id="actions">
+                        <a class="close form_button sprited" id="cancel" href="#">Cancel</a>
+                        <a class="form_button sprited" id="log_in" href="#">Sign in</a>
+                    </div>
+                </div>
+                <h3 id="left_out" class="sprited">Feeling left out?</h3>
+                <span>Don't be sad, just <a href="#">click here</a> to sign up!</span>
+                <a id="close_x" class="close sprited" href="#">close</a>
+            </div>
+
+Triggering a close
+You can manually trigger a close event by calling .trigger('close') on the element you have lightboxed. For example:
+
+$ele.lightbox_me();
+$ele.trigger('close');
+
+
+Triggering a reposition
+Repositioning happens on window resize or scroll, but sometimes you may need to trigger it manually. Call .trigger('reposition'); on the element you have lightboxed. For example:
+
+$ele.lightbox_me();
+$ele.trigger('reposition');
