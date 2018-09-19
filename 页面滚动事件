@@ -1,0 +1,48 @@
+　//兼容方式获取scrolltop以及设置scrolltop  
+
+　　　　function getScrollTop() {  
+
+　　　　　　var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;  
+
+　　　　　　return scrollTop;  
+
+　　　　}  
+
+　　　　function setScrollTop(scroll_top) {  
+
+　　　　　　document.documentElement.scrollTop = scroll_top;  
+
+　　　　　　 window.pageYOffset = scroll_top;  
+
+　　　　　　 document.body.scrollTop = scroll_top;  
+
+　　　　 }  
+///////////////
+$(window).scroll(function(){
+		var scrollHeight=$(document).height();
+		console.log("gundongle");
+		var scrollTop=$(window).scrollTop();
+		var $footerHeight=$(".page-footer").outerHeight(true);
+		var $windowHeight=$(window).innerHeight();
+		scrollTop>50?$("#scrollUp").fadeIn(200).css("display","block"):$("#scrollUp").fadeOut(200);
+		$bottomTools.css("bottom",scrollHeight-scrollTop-$footerHeight>$windowHeight?40:$windowHeight+scrollTop+$footerHeight+40-scrollHeight)
+		});
+	$("#scrollUp").click(function(e){
+		e.preventDefault();
+		console.log("dianji");
+		$("html,body,.main-container").animate({scrollTop:0})
+	});
+
+$(window).on("scroll",function(e){
+ 	var height = $('.item-content').height();
+ 	var now = $(document).scrollTop();
+ 	var type = $('.widget-body').attr('data-type');
+ 	if(type == 'index'){
+	 	if(now > height){
+			$('.widget-main').slideDown();
+ 		}
+ 	}else{
+		$('.widget-main').slideDown();
+ 	}
+});
+     
